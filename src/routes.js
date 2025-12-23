@@ -19,6 +19,7 @@
 import Index from "views/User.js";
 import Icons from "views/examples/Icons.js";
 import GPUaaS from "views/examples/Gpu.js";
+import Dev from "views/dev.js";
 
 var routes = [
   {
@@ -40,6 +41,13 @@ var routes = [
     name: "GPUaaS",
     icon: "ni ni-pin-3 text-orange",
     component: <GPUaaS />,
+    layout: "/admin",
+  },
+  {
+    path: "/dev",
+    name: "개발중",
+    icon: "ni ni-pin-3 text-orange",
+    component: <Dev />,
     layout: "/admin",
   },
 ];

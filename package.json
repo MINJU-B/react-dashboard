@@ -45,11 +45,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.5.1",
     "ajv": "^8.16.0",
+    "axios": "^1.13.2",
     "bootstrap": "4.6.2",
     "chart.js": "2.9.4",
     "classnames": "2.3.2",
     "moment": "2.29.4",
     "nouislider": "15.4.0",
+    "pg": "^8.16.3",
     "react": "18.2.0",
     "react-chartjs-2": "2.11.2",
     "react-copy-to-clipboard": "5.1.0",
@@ -76,3 +78,4 @@
     "chokidar": "3.5.3"
   }
 }
+
