@@ -64,9 +64,46 @@ const GPUaaS = (props) => {
     setActiveNav(index);
     setChartExample8Data("data" + index);
   };
+
+  const userCards = [
+    {
+      key: "build",
+      title: "장비 구축 건 수",
+      value: "8종",
+      goal: "8종",
+      iconClass: "fas fa-chart-bar",
+      iconBgClass: "bg-danger",
+      delta: "100%",
+      deltaDirection: "up",
+      // deltaText: "Since last month",
+    },
+    {
+      key: "working",
+      title: "장비 가동률(%)",
+      value: "74.56",
+      goal: "78.4%",      
+      iconClass: "fas fa-chart-pie",
+      iconBgClass: "bg-danger",
+      delta: "95.1%",
+      deltaDirection: "down",
+      // deltaText: "Since last week",
+    },
+    {
+      key: "usage",
+      title: "장비 이용 기관 수",
+      value: "112건",
+      goal: "120건",      
+      iconClass: "fas fa-database",
+      iconBgClass: "bg-danger",
+      delta: "93.3%",
+      deltaDirection: "down",
+      // deltaText: "Since yesterday",
+    },
+  ];    
+
   return (
     <>
-      <Header />
+      <Header title="USER" subtitle="플랫폼 사용자 현황" cards={userCards} />
       {/* Page content */}
       <Container className="mt--7" fluid>
 				<Row>

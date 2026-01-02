@@ -42,7 +42,6 @@ import {
   chartExample4,  
   chartExample5
 } from "variables/charts";
-import { chartExample1 } from "variables/charts";
 
 const Icons = () => {
   const [activeNav, setActiveNav] = useState(1);
@@ -66,9 +65,47 @@ const Icons = () => {
     setActiveNav_cate(index);
     setChartExample4Data("data" + index);
   };
+
+  const userCards = [
+    {
+      key: "data",
+      title: "정보자료(데이터) 개발 수",
+      value: "112건",
+      goal: "200건",
+      iconClass: "fas fa-chart-bar",
+      iconBgClass: "bg-danger",
+      delta: "56%",
+      deltaDirection: "down",
+      // deltaText: "Since last month",
+    },
+    {
+      key: "download",
+      title: "정보자료 다운로드 수",
+      value: "362건",
+      goal: "800건",      
+      iconClass: "fas fa-chart-pie",
+      iconBgClass: "bg-danger",
+      delta: "45.2%",
+      deltaDirection: "down",
+      // deltaText: "Since last week",
+    },
+    {
+      key: "api",
+      title: "정보자료(API) 개발 수",
+      value: "83건",
+      goal: "85건",      
+      iconClass: "fas fa-database",
+      iconBgClass: "bg-danger",
+      delta: "102%",
+      deltaDirection: "up",
+      // deltaText: "Since yesterday",
+    },
+  ]; 
+
   return (
     <>
-      <Header />
+      <Header title="USER" subtitle="플랫폼 사용자 현황" cards={userCards} />
+
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* DATA */}

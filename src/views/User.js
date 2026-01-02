@@ -24,7 +24,6 @@ import Chart from "chart.js";
 import { Line, Bar, Doughnut, HorizontalBar } from "react-chartjs-2";
 // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardTitle,
@@ -32,8 +31,6 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
@@ -64,9 +61,58 @@ const Index = (props) => {
     setActiveNav(index);
     setChartExample10Data("data" + index);
   };
+
+  const userCards = [
+    {
+      key: "join",
+      title: "데이터포털 가입 회원 수",
+      value: "725명",
+      goal: "590명",
+      iconClass: "fas fa-chart-bar",
+      iconBgClass: "bg-danger",
+      delta: "123%",
+      deltaDirection: "up",
+      // deltaText: "Since last month",
+    },
+    {
+      key: "visit",
+      title: "데이터포털 방문자 수",
+      value: "12,166명",
+      goal: "1,160명",      
+      iconClass: "fas fa-chart-pie",
+      iconBgClass: "bg-danger",
+      delta: "1,048%",
+      deltaDirection: "up",
+      // deltaText: "Since last week",
+    },
+    {
+      key: "page_view",
+      title: "데이터포털 페이지뷰 수",
+      value: "221,841건",
+      goal: "25,000건",      
+      iconClass: "fas fa-database",
+      iconBgClass: "bg-danger",
+      delta: "887%",
+      deltaDirection: "up",
+      // deltaText: "Since yesterday",
+    },
+    {
+      key: "event",
+      title: "데이터포털 이벤트 발생 수",
+      value: "93,214건",
+      goal: "60,000건",      
+      iconClass: "fas fa-microchip",
+      iconBgClass: "bg-danger",
+      delta: "155%",
+      deltaDirection: "up",
+      // deltaText: "Since last month",
+    },
+  ];  
+  
   return (
     <>
-      <Header />
+      <Header title="USER" subtitle="플랫폼 사용자 현황" cards={userCards} />
+
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
