@@ -16,17 +16,18 @@
 
 */
 // import Index from "views/Index.js";
-import Index from "views/User.js";
+// import Index from "views/User.js";
+import User_2 from "views/User_2.js";
 import Icons from "views/examples/Icons.js";
 import GPUaaS from "views/examples/Gpu.js";
 import Dev from "views/dev.js";
 
 var routes = [
   {
-    path: "/index",
+    path: "/user_2",
     name: "User",
     icon: "ni ni-tv-2 text-primary",
-    component: <Index />,
+    component: <User_2 />,
     layout: "/admin",
   },
   {

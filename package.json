@@ -60,6 +60,7 @@
     "react-gauge-component": "^1.2.64",
     "react-router-dom": "6.21.1",
     "react-scripts": "5.0.1",
+    "react-wordcloud": "^1.2.7",
     "reactstrap": "8.10.0",
     "sass": "1.69.5"
   },
@@ -78,4 +79,3 @@
     "chokidar": "3.5.3"
   }
 }
-

@@ -728,6 +728,13 @@ pre code {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.center {
+  text-align: center;
 }
 
 .row-cols-1 > * {
@@ -16240,7 +16247,7 @@ a.btn-icon-only {
 }
 
 .chart-sm {
-  height: 230px;
+  height: 280px;
 }
 
 .chart-legend {
@@ -16589,7 +16596,7 @@ a.btn-icon-only {
 
 .footer {
   background: #f7fafc;
-  padding: 2.5rem 0;
+  padding: 1.5rem 0;
 }
 .footer .col-footer .heading {
   color: #8898aa;
