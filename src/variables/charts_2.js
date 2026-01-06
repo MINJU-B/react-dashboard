@@ -15,7 +15,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+import katech from "assets/img/icons/katech_2.png";
+import connect from "assets/img/icons/connect.png";
+import domestic from "assets/img/icons/korea.png";
+import oversea from "assets/img/icons/world.png";
+
 const Chart = require("chart.js");
+
 //
 // Chart extension for making the bars rounded
 // Code from: https://codepen.io/jedtrow/full/ygRYgo
@@ -1073,6 +1080,209 @@ export const chartExample7 = {
     "value": 1
   }
 ]
+};
+
+// 데이터 보유 현황
+export const chartExample8 = {
+  data1: [
+          { img: katech, title: "보유 데이터", desc: "65건" },
+          { img: connect, title: "연동 데이터", desc: "31건" },
+          { img: domestic, title: "국내 데이터", desc: "12,113건" },
+          { img: oversea, title: "해외 데이터", desc: "38,469건" },
+          ],
+  data2: [
+          { img: katech, title: "총 보유량", desc: "65건" },
+          { img: connect, title: "연동 데이터", desc: "31건" },
+          { img: domestic, title: "국내 데이터", desc: "12,113건" },
+          { img: oversea, title: "해외 데이터", desc: "38,469건" },
+          ]
+};
+
+// 수집데이터 분류 현황
+export const chartExample9 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          stacked: true,
+          ticks: {
+            callback: function (value) {
+              if (!(value % 1000)) {
+                //return '$' + value + 'k'
+                return value.toLocaleString();
+              }
+            },
+          },
+        },
+      ],
+      xAxes: [
+        {
+          stacked: true
+        }
+      ]
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var yLabel = item.yLabel;
+          var content = "";
+          if (data.datasets.length > 1) {
+            content += label +': ';
+          }
+          content += yLabel.toLocaleString() +'건';
+          return content;
+        },
+      },
+    },
+  },
+  data1: (canvas) => {
+    return {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "수집데이터",
+          data: [2391, 1940, 1464, 1973, 3924, 3632, 1453, 1561, 2345, 2987, 3100, 4234],
+          maxBarThickness: 20,
+          backgroundColor: "#ced4da",
+          maxBarThickness: 30,
+        },
+        {
+          label: "분류데이터",
+          data: [382, 293, 1030, 1090, 1030, 1310, 1040, 1090, 1340, 1580, 1620, 1980],
+          maxBarThickness: 20,
+          backgroundColor: "#5e72e4",
+          maxBarThickness: 30,
+        },        
+      ],
+    };
+  },
+  data2: (canvas) => {  
+    return {
+    // 해외
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "수집데이터",
+          data: [3291, 2093, 4045, 9215, 4016, 6428, 3167, 6389, 4234, 5021, 6123, 7345],
+          maxBarThickness: 20,
+          backgroundColor: "#ced4da",
+          maxBarThickness: 30,
+        },
+        {
+          label: "분류데이터",
+          data: [908, 1082, 1460, 1700, 1045, 2064, 904, 1084, 1340, 1580, 1620, 1980],
+          maxBarThickness: 20,
+          backgroundColor: "#11cdef",       
+          maxBarThickness: 30,   
+        },        
+      ],
+    };
+  },
+};
+
+// 정보자료(데이터) 활용 현황
+export const chartExample10 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          // stacked: true,
+          ticks: {
+            callback: function (value) {
+              if (!(value % 1000)) {
+                //return '$' + value + 'k'
+                return value.toLocaleString();
+              }
+            },
+          },
+        },
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var yLabel = item.yLabel;
+          var content = "";
+          if (data.datasets.length > 1) {
+            content += label +': ';
+          }
+          content += yLabel.toLocaleString() +'건';
+          return content;
+        },
+      },
+    },
+  },
+  data1: (canvas) => {
+    return {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "조회 수",
+          data: [2391, 1940, 1464, 1973, 3924, 3632, 1453, 1561, 2345, 2987, 3100, 4234],
+          // borderWidth: 3,
+        },    
+      ],
+    };
+  },
+  data2: (canvas) => {  
+    return {
+    // 해외 
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "다운로드 수",
+          data: [3291, 2093, 4045, 9215, 4016, 6428, 3167, 6389, 4234, 5021, 6123, 7345],
+          // borderWidth: 3,
+        },       
+      ],
+    };
+  },
+  data3: (canvas) => {  
+    return {
+    // 해외
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "공유 수",
+          data: [3291, 2093, 4045, 9215, 4016, 6428, 3167, 6389, 4234, 5021, 6123, 7345],
+          borderWidth: 3,
+        },   
+      ],
+    };
+  },  
+};
+
+// 정보자료(API) 제공 현황
+export const chartExample11 = {
+  options: {
+    cutoutPercentage: 55, 
+    legend: {
+      display: true,
+			position: "right",
+    },		
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.labels[item.index]|| "";
+          var value = data.datasets[item.datasetIndex].data[item.index];
+          return label + ': ' + value + "건";
+        },
+      },
+    },
+  },
+  data: {
+    labels: ["데이터", "서비스", "자동차산업특화", "AI/알고리즘", "기타(관리)"],
+    datasets: [
+      {
+        label: "가입자 수",
+        data: [11, 5, 43, 17, 8],
+        backgroundColor: ["#FA6868", "#FACE68","#5A9CB5","#FAAC68","#607B8F"],
+				cutoutPercentage: 30,
+      },
+    ],
+  },
 };
 
 // modules.exports = {

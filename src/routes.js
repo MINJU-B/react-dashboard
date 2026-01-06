@@ -18,7 +18,8 @@
 // import Index from "views/Index.js";
 // import Index from "views/User.js";
 import User_2 from "views/User_2.js";
-import Icons from "views/examples/Icons.js";
+import Data from "views/examples/Data.js";
+// import Icons from "views/examples/Icons.js";
 import GPUaaS from "views/examples/Gpu.js";
 import Dev from "views/dev.js";
 
@@ -31,10 +32,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
+    path: "/data",
     name: "Data",
     icon: "ni ni-planet text-blue",
-    component: <Icons />,
+    component: <Data />,
     layout: "/admin",
   },
   {

@@ -17251,6 +17251,7 @@ textarea[resize="horizontal"] {
 .table-flush th {
   border-left: 0;
   border-right: 0;
+  padding: 0.3rem 0.5rem;
 }
 .table-flush tbody tr:first-child td,
 .table-flush tbody tr:first-child th {

@@ -18882,18 +18882,18 @@ textarea[resize="horizontal"] {
 }
 
 .table-flush tbody td{
-  padding: 18px 16px;
+  padding: 10px 16px;
   vertical-align: middle;
 }
 
 .table-flush tbody tr:first-child td,
 .table-flush tbody tr:first-child th {
-  border-top: 0;
+  border-top: 10px;
 }
 
 .table-flush tbody tr:last-child td,
 .table-flush tbody tr:last-child th {
-  border-bottom: 0;
+  border-bottom: 10px;
 }
 
 .card .table {
