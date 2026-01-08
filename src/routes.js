@@ -15,42 +15,57 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-// import Index from "views/Index.js";
-// import Index from "views/User.js";
+// import Index from "views/Index.js"/
+import Index from "views/User.js";
+import Icons from "views/examples/Icons.js";
+import GPUaaS from "views/examples/Gpu.js";
 import User_2 from "views/User_2.js";
 import Data from "views/examples/Data.js";
-// import Icons from "views/examples/Icons.js";
-import GPUaaS from "views/examples/Gpu.js";
-import Dev from "views/dev.js";
+import GPUaaS_2 from "views/examples/Gpu_2.js";
+// import Dev from "views/dev.js";
 
 var routes = [
   {
     path: "/user_2",
-    name: "User",
+    name: "사용자",
     icon: "ni ni-tv-2 text-primary",
     component: <User_2 />,
     layout: "/admin",
   },
   {
     path: "/data",
-    name: "Data",
+    name: "데이터",
     icon: "ni ni-planet text-blue",
     component: <Data />,
     layout: "/admin",
   },
   {
-    path: "/gpu",
-    name: "GPUaaS",
+    path: "/gpu_2",
+    name: "인프라",
     icon: "ni ni-pin-3 text-orange",
-    component: <GPUaaS />,
+    component: <GPUaaS_2/>,
     layout: "/admin",
   },
-  {
-    path: "/dev",
-    name: "개발중",
-    icon: "ni ni-pin-3 text-orange",
-    component: <Dev />,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/index",
+  //   name: "user_1",
+  //   icon: "ni ni-pin-3 text-orange",
+  //   component: <Index/>,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/icons",
+  //   name: "data_1",
+  //   icon: "ni ni-pin-3 text-orange",
+  //   component: <Icons/>,
+  //   layout: "/admin",
+  // },  
+  // {
+  //   path: "/gpu",
+  //   name: "gpu_1",
+  //   icon: "ni ni-pin-3 text-orange",
+  //   component: <GPUaaS/>,
+  //   layout: "/admin",
+  // },   
 ];
 export default routes;

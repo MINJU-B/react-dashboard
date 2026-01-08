@@ -584,6 +584,11 @@ pre code {
   overflow-y: scroll;
 }
 
+.col-5-custom {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
 .container,
 .container-fluid,
 .container-sm,
@@ -1613,10 +1618,18 @@ pre code {
   vertical-align: top;
   border-top: 1px solid #e9ecef;
 }
+
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #e9ecef;
+  font-size: 0.85rem;
 }
+
+.table.table-font-lg th,
+.table.table-font-lg td {
+  font-size: 16px !important;
+}
+
 .table tbody + tbody {
   border-top: 2px solid #e9ecef;
 }
@@ -18831,6 +18844,11 @@ textarea[resize="horizontal"] {
   text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 1px solid #e9ecef;
+}
+
+.table .table-font-lg thead th,
+.table .table-font-lg tbody td {
+  font-size: 18px !important;
 }
 
 .table th {

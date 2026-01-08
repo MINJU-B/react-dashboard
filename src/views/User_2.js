@@ -15,6 +15,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { useState, memo, useMemo } from "react";
+// react component that copies the given text inside your clipboard
+import classnames from "classnames";
 // javascipt plugin for creating charts
 import Chart from "chart.js";
 // react plugin used to create charts
@@ -28,6 +31,9 @@ import {
   Container,
   Row,
   Col,
+  NavItem,
+  NavLink,
+  Nav,	
 } from "reactstrap";
 
 // core components
@@ -48,6 +54,15 @@ import Header from "components/Headers/Header.js";
 import ReactWordcloud from "react-wordcloud";
 
 const User_2 = (props) => {
+	// 기관(유형별) 가입자 현황
+	const [activeNav_1, setActiveNav_1] = useState(1);
+	const [chartExample6Data, setChartExample6Data] = useState("data1");
+	const toggleNavs_1 = (e, index) => {
+		e.preventDefault();
+		setActiveNav_1(index);
+		setChartExample6Data("data" + index);
+	};
+
   if (window.Chart) {
     parseOptions(Chart, chartOptions);
 		initChartScales(Chart);
@@ -67,11 +82,11 @@ const User_2 = (props) => {
     {
       key: "visit",
       title: "데이터포털 방문자 수",
-      value: "12,166명",
+      value: "13,098",
       goal: "1,160명",      
       iconClass: "fas fa-chart-pie",
       iconBgClass: "bg-danger",
-      delta: "1,048%",
+      delta: "1,129%",
       deltaDirection: "up",
       // deltaText: "Since last week",
     },
@@ -110,9 +125,25 @@ const User_2 = (props) => {
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
-										<h2 className="text-dark mb-0">데이터포털 가입자 현황</h2>
+										<h2 className="text-dark mb-0">데이터포털 가입자 수</h2>
 									</div>
 								</Row>
+								<div className="col">
+									<Nav className="justify-content-end" pills>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 1,
+												})}
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 1)}
+											>
+												<span className="d-none d-md-block">2025</span>
+												<span className="d-md-none">M</span>
+											</NavLink>
+										</NavItem>
+									</Nav>
+								</div>								
 							</CardHeader>
 							<CardBody>
 								{/* Chart */}
@@ -130,14 +161,30 @@ const User_2 = (props) => {
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
-										<h2 className="text-dark mb-0">데이터포털 방문자 현황</h2>
+										<h2 className="text-dark mb-0">데이터포털 방문자 수</h2>
 									</div>
 								</Row>
+								<div className="col">
+									<Nav className="justify-content-end" pills>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 1,
+												})}
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 1)}
+											>
+												<span className="d-none d-md-block">2025</span>
+												<span className="d-md-none">M</span>
+											</NavLink>
+										</NavItem>
+									</Nav>
+								</div>
 							</CardHeader>
 							<CardBody>
 								{/* Chart */}
 								<div className="chart-sm">
-                  <Line
+                  <Bar
                     data={chartExample2.data}
                     options={chartExample2.options}
                   />											
@@ -152,9 +199,25 @@ const User_2 = (props) => {
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
-										<h2 className="text-dark mb-0">데이터포털 페이지뷰</h2>
+										<h2 className="text-dark mb-0">데이터포털 페이지뷰 수</h2>
 									</div>
 								</Row>
+								<div className="col">
+									<Nav className="justify-content-end" pills>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 1,
+												})}
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 1)}
+											>
+												<span className="d-none d-md-block">2025</span>
+												<span className="d-md-none">M</span>
+											</NavLink>
+										</NavItem>
+									</Nav>
+								</div>								
 							</CardHeader>
 							<CardBody>
 								{/* Chart */}
@@ -163,7 +226,7 @@ const User_2 = (props) => {
                     data={chartExample3.data}
                     options={chartExample3.options}
                   />										
-								</div>
+								</div>						
 							</CardBody>
 						</Card>
 					</Col>					
@@ -172,9 +235,25 @@ const User_2 = (props) => {
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
-										<h2 className="text-dark mb-0">데이터포털 이벤트 현황</h2>
+										<h2 className="text-dark mb-0">데이터포털 이벤트 발생 수</h2>
 									</div>
 								</Row>
+								<div className="col">
+									<Nav className="justify-content-end" pills>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 1,
+												})}
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 1)}
+											>
+												<span className="d-none d-md-block">2025</span>
+												<span className="d-md-none">M</span>
+											</NavLink>
+										</NavItem>
+									</Nav>
+								</div>								
 							</CardHeader>
 							<CardBody>
 								{/* Chart */}
@@ -209,23 +288,69 @@ const User_2 = (props) => {
 							</CardBody>
 						</Card>
 					</Col>		
-					<Col className="mb-5 mb-xl-0" xl="5">
+					<Col className="mb-5 mb-xl-0" xl="3">
 						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
-										<h2 className="text-dark mb-0">기관 가입자 현황</h2>
+										<h2 className="text-dark mb-0">기관별 가입자 현황</h2>
 									</div>
 								</Row>
+								{/* <div className="col">
+									<Nav className="justify-content-end" pills>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 1,
+												})}
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 1)}
+											>
+												<span className="d-none d-md-block">비영리</span>
+												<span className="d-md-none">M</span>
+											</NavLink>
+										</NavItem>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 2,
+												})}
+												data-toggle="tab"
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 2)}
+											>
+												<span className="d-none d-md-block">기업</span>
+												<span className="d-md-none">W</span>
+											</NavLink>
+										</NavItem>
+										<NavItem>
+											<NavLink
+												className={classnames("py-2 px-4", {
+													active: activeNav_1 === 3,
+												})}
+												data-toggle="tab"
+												href="#pablo"
+												onClick={(e) => toggleNavs_1(e, 3)}
+											>
+												<span className="d-none d-md-block">학교</span>
+												<span className="d-md-none">W</span>
+											</NavLink>
+										</NavItem>										
+									</Nav>
+								</div> */}
 							</CardHeader>
 							<CardBody>
 								{/* Chart */}
 								<div className="chart">
+									<Doughnut
+										data={chartExample6.data}
+										options={chartExample6.options}
+									/>
 								</div>
 							</CardBody>
 						</Card>
 					</Col>				
-					<Col className="mb-5 mb-xl-0" xl="4">
+					<Col className="mb-5 mb-xl-0" xl="6">
 						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
@@ -238,7 +363,6 @@ const User_2 = (props) => {
 								{/* Chart */}
 								<div className="chart">
 									<ReactWordcloud
-										callbacks={chartExample7.callback}
 										size={chartExample7.size}
 										words={chartExample7.words}
 										options={chartExample7.options}

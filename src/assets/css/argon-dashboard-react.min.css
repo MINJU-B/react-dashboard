@@ -17209,11 +17209,12 @@ textarea[resize="horizontal"] {
 .table thead th {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 1px solid #e9ecef;
 }
+
 .table th {
   font-weight: 600;
 }
@@ -17224,7 +17225,7 @@ textarea[resize="horizontal"] {
 }
 .table td,
 .table th {
-  font-size: 0.8125rem;
+  font-size: 1rem;
   white-space: nowrap;
 }
 .table.align-items-center td,

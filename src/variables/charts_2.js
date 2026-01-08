@@ -186,122 +186,6 @@ var colors = {
   transparent: "transparent",
 };
 
-// Methods
-
-// // Chart.js global options
-// function chartOptions() {
-//   // Options
-//   var options = {
-//     defaults: {
-//       global: {
-//         responsive: true,
-//         maintainAspectRatio: false,
-//         defaultColor: mode === "dark" ? colors.gray[700] : colors.gray[600],
-//         defaultFontColor: mode === "dark" ? colors.gray[700] : colors.gray[600],
-//         defaultFontFamily: fonts.base,
-//         defaultFontSize: 13,
-//         layout: {
-//           padding: 0,
-//         },
-//         legend: {
-//           display: false,
-//           position: "bottom",
-//           labels: {
-//             usePointStyle: true,
-//             padding: 16,
-//           },
-//         },
-//         elements: {
-//           point: {
-//             radius: 0,
-//             backgroundColor: colors.theme["primary"],
-//           },
-//           line: {
-//             tension: 0.4,
-//             borderWidth: 4,
-//             borderColor: colors.theme["primary"],
-//             backgroundColor: colors.transparent,
-//             borderCapStyle: "rounded",
-//           },
-//           rectangle: {
-//             backgroundColor: colors.theme["warning"],
-//           },
-//           arc: {
-//             backgroundColor: colors.theme["primary"],
-//             borderColor: mode === "dark" ? colors.gray[800] : colors.white,
-//             borderWidth: 4,
-//           },
-//         },
-//         tooltips: {
-//           enabled: true,
-//           mode: "index",
-//           intersect: false,
-//         },
-//       },
-//       doughnut: {
-//         cutoutPercentage: 50,
-//         legendCallback: function (chart) {
-//           var data = chart.data;
-//           var content = "";
-
-//           data.labels.forEach(function (label, index) {
-//             var bgColor = data.datasets[0].backgroundColor[index];
-
-//             content += '<span class="chart-legend-item">';
-//             content +=
-//               '<i class="chart-legend-indicator" style="background-color: ' +
-//               bgColor +
-//               '"></i>';
-//             content += label;
-//             content += "</span>";
-//           });
-
-//           return content;
-//         },
-//       },
-//     },
-//   };
-
-//   // yAxes
-//   Chart.scaleService.updateScaleDefaults("linear", {
-//     gridLines: {
-//       borderDash: [2],
-//       borderDashOffset: [2],
-//       color: mode === "dark" ? colors.gray[900] : colors.gray[300],
-//       drawBorder: false,
-//       drawTicks: false,
-//       lineWidth: 0,
-//       zeroLineWidth: 0,
-//       zeroLineColor: mode === "dark" ? colors.gray[900] : colors.gray[300],
-//       zeroLineBorderDash: [2],
-//       zeroLineBorderDashOffset: [2],
-//     },
-//     ticks: {
-//       beginAtZero: true,
-//       padding: 10,
-//       callback: function (value) {
-//         if (!(value % 10)) {
-//           return value;
-//         }
-//       },
-//     },
-//   });
-
-//   // xAxes
-//   Chart.scaleService.updateScaleDefaults("category", {
-//     gridLines: {
-//       drawBorder: false,
-//       drawOnChartArea: false,
-//       drawTicks: false,
-//     },
-//     ticks: {
-//       padding: 20,
-//     },
-//   });
-
-//   return options;
-// }
-
 export const chartOptions = {
   defaults: {
     global: {
@@ -310,7 +194,7 @@ export const chartOptions = {
       defaultColor: mode === "dark" ? colors.gray[700] : colors.gray[600],
       defaultFontColor: mode === "dark" ? colors.gray[700] : colors.gray[600],
       defaultFontFamily: fonts.base,
-      defaultFontSize: 13,
+      defaultFontSize: 14,
       layout: {
         padding: 0,
       },
@@ -439,7 +323,7 @@ export const chartExample1 = {
           ticks: { beginAtZero: true, stepSize: 5},
 					scaleLabel: {
 						display: true,
-						labelString: "월별 가입자 수",
+						labelString: "가입자 수",
 					},
 				},
 				{
@@ -451,7 +335,7 @@ export const chartExample1 = {
 					},
 					scaleLabel: {
 						display: true,
-						labelString: "누적 가입자 수",
+						labelString: "가입자 누적 수",
 					},
 				},
 			],
@@ -465,7 +349,7 @@ export const chartExample1 = {
           if (data.datasets.length > 1) {
             content += label;
           }
-          content += yLabel + '명';
+          content += ': ' + yLabel + '명';
           return content;
         },
       },
@@ -478,16 +362,15 @@ export const chartExample1 = {
     datasets: [
       {
 				type: 'bar',
-        label: "월별 가입자 수",
+        label: "가입자 수",
         data: [10, 7, 7, 9, 17, 20, 9, 15 ,28 ,16 ,16 ,10],
-				borderWidth: 3,
 				yAxisID: 'y-left',
 				maxBarThickness: 30,
-				backgroundColor: '#11cdef',
+				backgroundColor: '#5A9CB5',
       },
       {
 				type: 'line',
-        label: "누적 가입자 수",
+        label: "가입자 누적 수",
         data: [571, 578, 585, 594, 611, 631, 640, 655, 683, 699, 715, 725],
 				borderWidth: 3,
 				yAxisID: 'y-right',
@@ -500,18 +383,47 @@ export const chartExample1 = {
 export const chartExample2 = {
   options: {
     scales: {
-      yAxes: [
-        {
+      xAxes: [{
+        offset: true,
+      }],			
+			yAxes: [
+				{
+					id: "y-left",	// 월별
+					position: "left",
           ticks: {
             callback: function (value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
-                return value;
+            if (!(value % 100)) {
+              //return '$' + value + 'k'
+              return value.toLocaleString();
               }
             },
           },
-        },
-      ],
+					scaleLabel: {
+						display: true,
+						labelString: "방문자 수",
+					},
+				},
+				{
+					id: "y-right",	// 누적
+					position: "right",
+          ticks: {
+            beginAtZero: false,
+            callback: function (value) {
+            if (!(value % 1000)) {
+              //return '$' + value + 'k'
+              return value.toLocaleString();
+              }
+            },
+          },					
+          gridLines: {
+						drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+					},
+					scaleLabel: {
+						display: true,
+						labelString: "방문자 누적 수",
+					},
+				},
+			],
     },
     tooltips: {
       callbacks: {
@@ -522,7 +434,7 @@ export const chartExample2 = {
           if (data.datasets.length > 1) {
             content += label;
           }
-          content += yLabel + '명';
+          content += ': ' + yLabel.toLocaleString() + '명';
           return content;
         },
       },
@@ -533,9 +445,20 @@ export const chartExample2 = {
     datasets: [
       {
         label: "방문자 수",
-        data: [192, 182, 192, 166, 265, 221, 274, 240, 220, 184, 123, 138],
-				borderWidth: 3,
+        yAxisID: "y-left",
+        type: "bar",
+        data: [158, 146, 163, 146, 240, 190, 480, 402, 375, 278, 169, 197],
+        maxBarThickness: 30,        
+        backgroundColor: "#5A9CB5",
       },
+      {
+        label: "방문자 누적 수",
+        yAxisID: "y-right",
+        type: "line",              
+        // ~ 2024.12.31까지 방문자 수: 10,154
+        data: [10312, 10458, 10621, 10767, 11007, 11197, 11677, 12079, 12454, 12732, 12901, 13098],
+				borderWidth: 3,
+      },      
     ],
   },
 };
@@ -545,18 +468,47 @@ export const chartExample3 = {
 // 데이터포털 페이지뷰 현황
   options: {
     scales: {
-      yAxes: [
-        {
+      xAxes: [{
+        offset: true,
+      }],			
+			yAxes: [
+				{
+					id: "y-left",	// 월별
+					position: "left",
           ticks: {
             callback: function (value) {
-              if (!(value % 100)) {
-                //return '$' + value + 'k'
-                return value.toLocaleString();
+            if (!(value % 500)) {
+              //return '$' + value + 'k'
+              return value.toLocaleString();
               }
             },
           },
-        },
-      ],
+					scaleLabel: {
+						display: true,
+						labelString: "페이지뷰 수",
+					},
+				},
+				{
+					id: "y-right",	// 누적
+					position: "right",
+          ticks: {
+            beginAtZero: false,
+            callback: function (value) {
+            if (!(value % 20000)) {
+              //return '$' + value + 'k'
+              return value.toLocaleString();
+              }
+            },
+          },					
+          gridLines: {
+						drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+					},
+					scaleLabel: {
+						display: true,
+						labelString: "페이지뷰 누적 수",
+					},
+				},
+			],
     },
     tooltips: {
       callbacks: {
@@ -567,7 +519,7 @@ export const chartExample3 = {
           if (data.datasets.length > 1) {
             content += label;
           }
-          content += yLabel.toLocaleString() + '건';
+          content += ': ' + yLabel.toLocaleString() + '건';
           return content;
         },
       },
@@ -577,10 +529,19 @@ export const chartExample3 = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        label: "이벤트: 페이지 뷰",
+        label: "페이지뷰 수",
+        yAxisID: "y-left",
+        type: "bar",
         data: [5260, 2625, 2958, 2351, 3621, 4148, 10542, 10442, 11124, 8481, 7026, 10637],
-				borderWidth: 3,
-      },
+        maxBarThickness: 30,        
+        backgroundColor: "#5A9CB5",
+      },      
+      {
+        label: "페이지뷰 누적수",
+        yAxisID: "y-right",
+        type: "line",
+        data: [142626, 147886, 150511, 153469, 155820, 159441, 163589, 174131, 184573, 195697, 204178, 211204, 221841],
+      },            
     ],
   },
 };
@@ -589,18 +550,47 @@ export const chartExample3 = {
 export const chartExample4 = {
   options: {
     scales: {
-      yAxes: [
-        {
+      xAxes: [{
+        offset: true,
+      }],			
+			yAxes: [
+				{
+					id: "y-left",	// 월별
+					position: "left",
           ticks: {
             callback: function (value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
-                return value.toLocaleString();
+            if (!(value % 500)) {
+              //return '$' + value + 'k'
+              return value.toLocaleString();
               }
             },
           },
-        },
-      ],
+					scaleLabel: {
+						display: true,
+						labelString: "이벤트 발생 수",
+					},
+				},
+				{
+					id: "y-right",	// 누적
+					position: "right",
+          ticks: {
+            beginAtZero: false,
+            callback: function (value) {
+            if (!(value % 5000)) {
+              //return '$' + value + 'k'
+              return value.toLocaleString();
+              }
+            },
+          },					
+          gridLines: {
+						drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+					},
+					scaleLabel: {
+						display: true,
+						labelString: "이벤트 발생 누적 수",
+					},
+				},
+			],
     },
     tooltips: {
       callbacks: {
@@ -622,9 +612,18 @@ export const chartExample4 = {
     datasets: [
       {
         label: "이벤트 발생 수",
+        yAxisID: "y-left",
+        type: "bar",
         data: [1986, 814, 921, 714, 1054, 1340, 3193, 3989, 3295, 2637, 1994, 3950],
-				borderWidth: 3,
-      },
+        maxBarThickness: 30,        
+        backgroundColor: "#5A9CB5",
+      },      
+      {
+        label: "이벤트 발생 누적수",
+        yAxisID: "y-right",
+        type: "line",
+        data: [67327, 69313, 70127, 71048, 71762, 72816, 74156, 77349, 81338, 84633, 87270, 89264, 93214],
+      },         
     ],
   },
 };
@@ -652,7 +651,7 @@ export const chartExample5 = {
     datasets: [
       {
         label: "가입자 수",
-        data: [338, 387],
+        data: [332, 393],
         backgroundColor: ["#739BE1", "#5050FF"],
 				cutoutPercentage: 30,
       },
@@ -663,46 +662,80 @@ export const chartExample5 = {
 // 기관 가입자 현황
 export const chartExample6 = {
   options: {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            callback: function (value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
-                return value;
-              }
-            },
-          },
-        },
-      ],
-    },
+    cutoutPercentage: 55, 
+    legend: {
+      display: true,
+			position: "right",
+    },		
     tooltips: {
       callbacks: {
         label: function (item, data) {
-          var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
-          if (data.datasets.length > 1) {
-            content += label;
-          }
-          content += yLabel + '명';
-          return content;
+          var label = data.labels[item.index]|| "";
+          var value = data.datasets[item.datasetIndex].data[item.index];
+          var value_1 = data.datasets[item.datasetIndex].data_1[item.index];
+          return label + ': ' + value + "%" +' (' + value_1 +'명)';
         },
       },
     },
   },
+  // data1: (canvas) => {
+  //   return {
+  //   // 비영리기관
+  //     // labels: ["한국도로교통공단", "한국자동차연구원", "대구디지털혁신진흥원",      
+  //     //   "한국정보통신기술협회", "한국인터넷진흥원", "한국생산기술연구원", "대구기계부품연구원",
+  //     //   "한국항공우주산업진흥협회", "한국전자기술연구원","한국자동차산업협동조합", "정부", "한국기계연구원", "(재)대구테크노파크"],
+  //     labels: ["한국도로교통공단", "한국자동차연구원", "대구디지털혁신진흥원",      
+  //       "한국정보통신기술협회", "한국인터넷진흥원", "한국생산기술연구원", "대구기계부품연구원"],
+  //     datasets: [
+  //       {
+  //         label: "비영리기관",
+  //         // data: [176, 33, 21, 2, 2, 2, 1,1,1,1,1,1,1,],
+  //         data: [176, 33, 21, 2, 2, 2, 1],
+  //         maxBarThickness: 30,
+  //         backgroundColor: "#5A9CB5",
+  //       },
+  //     ],
+  //   };
+  // },
+  // data2: (canvas) => {  
+  //   return {
+  //   // 해외
+  //     labels: ["모비젠", "엑세스랩", "데이터쿡", "(주)유니크", "에스유엠",],
+  //     datasets: [
+  //       {
+  //         label: "기업",
+  //         data: [16,4,4,4,4,],
+  //         maxBarThickness: 30,
+  //         backgroundColor: "#5A9CB5",
+  //       },
+  //     ],
+  //   };
+  // },
+  // data3: (canvas) => {  
+  //   return {
+  //   // 학교
+  //     labels: ["국민대학교", "서울대학교", "아주대학교", "유한대학교", "연세대학교"],
+  //     datasets: [
+  //       {
+  //         label: "학교",
+  //         data: [2,2,2,1,1],
+  //         maxBarThickness: 30,
+  //         backgroundColor: "#5A9CB5",
+  //       },
+  //     ],
+  //   };
+  // },  
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["비영리", "기업", "학교", "기타"],
     datasets: [
       {
-        label: "방문자 수",
-        data: [192, 182, 192, 166, 265, 221, 274, 240, 220, 184, 123, 138],
-				borderWidth: 2,
+        label: "가입자 수",
+        data_1: [243, 103, 14, 33],
+        data: [61.8, 26.2, 3.56, 8.39],
+        backgroundColor: ["#36656B", "#75B06F","#DAD887", "#F0F8A4"],
       },
     ],
-  },
-};
+  },};
 
 // 데이터포털 이용기관
 export const chartExample7 = {
@@ -710,9 +743,10 @@ export const chartExample7 = {
   // 	getWordColor: word => word.value > 20 ? "blue" : "red",
 	// },
   options: {
-		rotations: 2,
-		rotationAngles: [-90, 0],
-		fontSizes: [20, 70],
+		rotations: 4,
+		rotationAngles: [90, 0],
+		fontSizes: [30, 70],
+    padding: 7, // 글자간 간격 조절
   },
   words: [
   {
@@ -727,10 +761,10 @@ export const chartExample7 = {
     "text": "대구디지털혁신진흥원",
     "value": 21
   },
-  {
-    "text": "기타",
-    "value": 20
-  },
+  // {
+  //   "text": "기타",
+  //   "value": 20
+  // },
   {
     "text": "모비젠",
     "value": 16
@@ -867,218 +901,218 @@ export const chartExample7 = {
     "text": "현대자동차",
     "value": 1
   },
-  {
-    "text": "(주)메텍",
-    "value": 1
-  },
-  {
-    "text": "42dot",
-    "value": 1
-  },
-  {
-    "text": "위드체인지",
-    "value": 1
-  },
-  {
-    "text": "트라이월드홀딩스",
-    "value": 1
-  },
-  {
-    "text": "더선한 주식회사",
-    "value": 1
-  },
-  {
-    "text": "CJ올리브네트웍스",
-    "value": 1
-  },
-  {
-    "text": "레보텍",
-    "value": 1
-  },
-  {
-    "text": "씨이랩",
-    "value": 1
-  },
-  {
-    "text": "한국자동차산업협동조합",
-    "value": 1
-  },
-  {
-    "text": "Korea.kr",
-    "value": 1
-  },
-  {
-    "text": "보그워너",
-    "value": 1
-  },
-  {
-    "text": "MORAI",
-    "value": 1
-  },
-  {
-    "text": "인포뱅크",
-    "value": 1
-  },
-  {
-    "text": "한국텍트로닉스(주)",
-    "value": 1
-  },
-  {
-    "text": "NC",
-    "value": 1
-  },
-  {
-    "text": "BHSN.AI",
-    "value": 1
-  },
-  {
-    "text": "(주)씨오알엔",
-    "value": 1
-  },
-  {
-    "text": "곳간로지스(주)",
-    "value": 1
-  },
-  {
-    "text": "고려대학교",
-    "value": 1
-  },
-  {
-    "text": "명지전문대학교",
-    "value": 1
-  },
-  {
-    "text": "MDS테크",
-    "value": 1
-  },
-  {
-    "text": "(주)이엘일렉트릭",
-    "value": 1
-  },
-  {
-    "text": "경북대학교",
-    "value": 1
-  },
-  {
-    "text": "OPENUP",
-    "value": 1
-  },
-  {
-    "text": "차지인",
-    "value": 1
-  },
-  {
-    "text": "㈜금룡테크",
-    "value": 1
-  },
-  {
-    "text": "(주)대영채비",
-    "value": 1
-  },
-  {
-    "text": "(주)이래오토모티브시스템",
-    "value": 1
-  },
-  {
-    "text": "모티",
-    "value": 1
-  },
-  {
-    "text": "대구가톨릭대학교",
-    "value": 1
-  },
-  {
-    "text": "상상할수없는",
-    "value": 1
-  },
-  {
-    "text": "기아자동차",
-    "value": 1
-  },
-  {
-    "text": "한국기계연구원",
-    "value": 1
-  },
-  {
-    "text": "deepmine",
-    "value": 1
-  },
-  {
-    "text": "Nota AI",
-    "value": 1
-  },
-  {
-    "text": "(주)씨티알모빌리티",
-    "value": 1
-  },
-  {
-    "text": "㈜스패로우",
-    "value": 1
-  },
-  {
-    "text": "ETAS",
-    "value": 1
-  },
-  {
-    "text": "트리즈엔지니어링",
-    "value": 1
-  },
-  {
-    "text": "한림기계(주)",
-    "value": 1
-  },
-  {
-    "text": "(주)맵퍼스",
-    "value": 1
-  },
-  {
-    "text": "(주)라스컴",
-    "value": 1
-  },
-  {
-    "text": "(재)대구테크노파크(대구TP)",
-    "value": 1
-  },
-  {
-    "text": "컬처메이커스",
-    "value": 1
-  },
-  {
-    "text": "IntrepidCS",
-    "value": 1
-  },
-  {
-    "text": "(주)퀀텀하이텍",
-    "value": 1
-  },
-  {
-    "text": "HL만도",
-    "value": 1
-  },
-  {
-    "text": "퓨전월드와이드",
-    "value": 1
-  },
-  {
-    "text": "이노뎁",
-    "value": 1
-  },
-  {
-    "text": "(주)아이스펙",
-    "value": 1
-  },
-  {
-    "text": "규리넷",
-    "value": 1
-  },
-  {
-    "text": "레보랩",
-    "value": 1
-  },
-  {
-    "text": "스프링클라우드",
-    "value": 1
-  }
+  // {
+  //   "text": "(주)메텍",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "42dot",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "위드체인지",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "트라이월드홀딩스",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "더선한 주식회사",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "CJ올리브네트웍스",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "레보텍",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "씨이랩",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "한국자동차산업협동조합",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "Korea.kr",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "보그워너",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "MORAI",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "인포뱅크",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "한국텍트로닉스(주)",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "NC",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "BHSN.AI",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)씨오알엔",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "곳간로지스(주)",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "고려대학교",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "명지전문대학교",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "MDS테크",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)이엘일렉트릭",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "경북대학교",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "OPENUP",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "차지인",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "㈜금룡테크",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)대영채비",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)이래오토모티브시스템",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "모티",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "대구가톨릭대학교",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "상상할수없는",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "기아자동차",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "한국기계연구원",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "deepmine",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "Nota AI",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)씨티알모빌리티",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "㈜스패로우",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "ETAS",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "트리즈엔지니어링",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "한림기계(주)",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)맵퍼스",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)라스컴",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(재)대구테크노파크(대구TP)",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "컬처메이커스",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "IntrepidCS",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)퀀텀하이텍",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "HL만도",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "퓨전월드와이드",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "이노뎁",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "(주)아이스펙",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "규리넷",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "레보랩",
+  //   "value": 1
+  // },
+  // {
+  //   "text": "스프링클라우드",
+  //   "value": 1
+  // }
 ]
 };
 
@@ -1285,6 +1319,308 @@ export const chartExample11 = {
   },
 };
 
+// 장비 구축 현황
+export const chartExample12 = {
+  options: {
+    scales: {
+      xAxes: [{
+        offset: true,
+        stacked: true
+      }],			
+      yAxes: [
+				{
+					id: "y-left",	// 월별
+					position: "left",
+          // gridLines: {
+          //   drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+          // },          
+          ticks: {
+            callback: function (value) {
+              if (!(value % 1)) {
+                return value;
+              }
+            },
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "장비 구축 수(종)",
+					},
+				},    
+				{
+					id: "y-right",	// 월별
+					position: "right",
+          gridLines: {
+            drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+          },
+          ticks: {
+            callback: function (value) {
+              if (!(value % 10)) {
+                return value;
+              }
+            },
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "장비 구축 수(개)",
+					},
+				},             
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var unit  = data.datasets[item.datasetIndex].unit
+          var yLabel = item.yLabel;
+          var content = "";
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+          content += ': ' + yLabel + unit;
+          return content;
+        },
+      },
+    },
+  },
+
+  data: {
+    labels: ["2021", "2022", "2023", "2024", "2025"],
+    datasets: [
+      {
+        unit: '종',
+        type: 'bar',
+        label: "구축 장비 수",
+        yAxisID: 'y-left',
+        data: [2, 2, 4, 0, 0],
+				backgroundColor: "#5388b3ff",
+        maxBarThickness: 30,
+        stack: 'Stack 0',
+      },
+      {
+        unit: '개',
+        type: 'bar',
+        label: "구축 서버 수",
+        yAxisID: 'y-right',
+        data: [2, 36, 17, 16, 3],
+				backgroundColor: "#55d9e2ff",
+        maxBarThickness: 30,
+        stack: 'Stack 1',
+      },      
+      {
+        unit: '종',
+        type: 'line',
+        label: "구축 장비 누적 수",
+        yAxisID: 'y-left',
+        borderWidth: 3,
+        borderColor: "#5388b3ff",
+        data: [2, 4, 8, 8, 8],
+      },            
+     {
+        unit: '개',      
+        type: 'line',
+        label: "구축 서버 누적 수",
+        yAxisID: 'y-right',
+        borderWidth: 3,
+        borderColor: "#55d9e2ff",
+        data: [2, 38, 55, 71, 74],
+      },                  
+    ],
+  },
+};
+
+export const chartExample13 = {
+  options:[
+      {
+        limit: 20,
+        color: '#5BE12C',
+        showTick: true
+      },
+      {
+        limit: 40,
+        color: '#F5CD19',
+        showTick: true
+      },
+      {
+        limit: 60,
+        color: '#F58B19',
+        showTick: true
+      },
+      {
+        limit: 100,
+        // color: '#5BE12C',
+        color: '#EA4228',
+        showTick: true
+      },
+    ]
+}
+
+export const chartExample14 = {
+  options: {
+    scales: {
+      xAxes: [{
+        offset: true,
+        stacked: true
+      }],			
+      yAxes: [
+				{
+					id: "y-left",	// 활용 시간
+					position: "left",
+          ticks: {
+            callback: function (value) {
+              if (!(value % 20)) {
+                return value;
+              }
+            },
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "장비 가동 시간",
+					},
+				},    
+				{
+					id: "y-right",	// 활용률
+					position: "right",
+          gridLines: {
+            drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+          },
+          ticks: {
+            callback: function (value) {
+              if (!(value % 10)) {
+                return value;
+              }
+            },
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "장비 가동률(%)",
+					},
+				},             
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var yLabel = item.yLabel;
+          var content = "";
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+          content += ': ' + yLabel;
+          return content;
+        },
+      },
+    },
+  },
+
+  data: {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        type: 'bar',
+        label: "장비 사용시간(h)",
+        yAxisID: 'y-left',
+        data: [114, 100, 117, 152, 213, 208, 213, 204, 260, 127, 126, 127],
+				backgroundColor: "#5A9CB5",
+        maxBarThickness: 30,
+      },     
+      {
+        type: 'line',
+        label: "장비 활용률(%)",
+        yAxisID: 'y-right',
+        borderWidth: 3,
+        data: [5.7, 10.7, 16.55, 24.15, 34.8, 45.2, 55.85, 66.05, 79.05, 85.4, 91.7, 98.05],
+      },            
+    ],
+  },
+};
+
+export const chartExample15  = {
+  options: {
+    scales: {
+      yAxes: [
+				{
+					id: "y-left",	// 활용 시간
+					position: "left",
+          ticks: {
+            callback: function (value) {
+              if (!(value % 1)) {
+                return value;
+              }
+            },
+            // fontColor: 'black',
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "장비 이용 기관 수",
+					},
+				},   
+				{
+					id: "y-right",	// 활용률
+					position: "right",
+          gridLines: {
+            drawOnChartArea: false, // 왼쪽 축 grid와 겹치지 않게
+          },
+          ticks: {
+            callback: function (value) {
+              if (!(value % 10)) {
+                return value;
+              }
+            },
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "장비 이용 기관 누적 수",
+					},
+				},                     
+      ],
+      // xAxes: [
+      //   {
+      //     ticks: {
+      //       // fontColor: 'black'
+      //     }
+      //   }
+      // ]
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var yLabel = item.yLabel;
+          var content = "";
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+          content += ': ' + yLabel +'명';
+          return content;
+        },
+      },
+    },
+  },
+
+  data: {
+    // labels: ["랩큐", "소리엔", "(주)에이치엠지", "(주)피에이치지", "레보텍",
+    //           "(주)퀀텀하이텍", "(주)에이테크", "(주)컬처메이커스", "슈어소프트"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+
+    datasets: [
+      {
+        type: 'bar',
+        label: "장비 활용 기관 수",
+        data: [0, 1, 0, 0, 7, 0, 6, 0, 7, 4, 0, 0],
+				backgroundColor: "#5A9CB5",
+        maxBarThickness: 30,
+      },      
+      {
+        type: 'line',
+        label: "장비 이용 누적 수",
+        yAxisID: 'y-right',
+        borderWidth: 3,
+        data: [101, 102, 102, 102, 109, 109, 115, 115, 122, 126, 126, 126],
+      },                
+    ],
+  },
+}
 // modules.exports = {
 //   chartOptions, // used inside src/views/Index.js
 //   parseOptions, // used inside src/views/Index.js

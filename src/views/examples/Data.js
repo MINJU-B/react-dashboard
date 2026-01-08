@@ -32,7 +32,6 @@ import {
   Row,
   Col,
 	Table,
-	Media,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
@@ -87,35 +86,33 @@ const Data = (props) => {
     {
       key: "data",
       title: "정보자료(데이터) 개발 수",
-      value: "112건",
+      // value: "112건",
+      value: "50,678건",
       goal: "200건",
       iconClass: "fas fa-chart-bar",
       iconBgClass: "bg-danger",
-      delta: "56%",
-      deltaDirection: "down",
-      // deltaText: "Since last month",
+      delta: "25,339%",
+      deltaDirection: "up",
     },
     {
       key: "download",
-      title: "정보자료 다운로드 수",
-      value: "362건",
+      title: "플랫폼 활용(다운로드, API 호출) 건수",
+      value: "1,610건",
       goal: "800건",      
       iconClass: "fas fa-chart-pie",
       iconBgClass: "bg-danger",
-      delta: "45.2%",
-      deltaDirection: "down",
-      // deltaText: "Since last week",
+      delta: "201.25%",
+      deltaDirection: "up",
     },
     {
       key: "api",
       title: "정보자료(API) 개발 수",
-      value: "83건",
-      goal: "85건",      
+      value: "85건",
+      goal: "83건",      
       iconClass: "fas fa-database",
       iconBgClass: "bg-danger",
       delta: "102%",
       deltaDirection: "up",
-      // deltaText: "Since yesterday",
     },
   ]; 
 
@@ -134,7 +131,7 @@ const Data = (props) => {
 										<h2 className="text-dark mb-0">데이터 보유 현황</h2>
 									</div>
 								</Row>
-								<div className="col">
+								{/* <div className="col">
 									<Nav className="justify-content-end" pills>
 										<NavItem>
 											<NavLink
@@ -162,7 +159,7 @@ const Data = (props) => {
 											</NavLink>
 										</NavItem>
 									</Nav>
-								</div>
+								</div> */}
 							</CardHeader>
 							<CardBody>
   							<Row className="align-items-stretch">
@@ -199,9 +196,25 @@ const Data = (props) => {
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
-										<h2 className="text-dark mb-0">수집데이터 분류 현황</h2>
-									</div>
+										<h2 className="text-dark mb-0">수집데이터 분류 현황</h2>                    
+									</div>                  
 								</Row>
+									<div className="col">
+										<Nav className="justify-content-start" pills>
+											<NavItem>
+												<NavLink
+													className={classnames("py-2 px-3", {
+														active: activeNav_2 === 1,
+													})}
+													href="#pablo"
+													onClick={(e) => toggleNavs_2(e, 1)}
+												>
+													<span className="d-none d-md-block">2024</span>
+													<span className="d-md-none">o</span>
+												</NavLink>
+											</NavItem>
+										</Nav>
+									</div>
 									<div className="col">
 										<Nav className="justify-content-end" pills>
 											<NavItem>
@@ -245,9 +258,10 @@ const Data = (props) => {
 					</Col>									
 				</Row>
 
-				<Row className="mt-3">			
+				<Row className="mt-3">
+				{/* 					
 					<Col className="mb-5 mb-xl-0" xl="6">
-						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
+						<Card className="bg-gradient-neutral shadow">	
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
@@ -265,7 +279,6 @@ const Data = (props) => {
 												onClick={(e) => toggleNavs_3(e, 1)}
 											>
 												<span className="d-none d-md-block">조회</span>
-												{/* <span className="d-md-none">M</span> */}
 											</NavLink>
 										</NavItem>
 										<NavItem>
@@ -278,7 +291,6 @@ const Data = (props) => {
 												onClick={(e) => toggleNavs_3(e, 2)}
 											>
 												<span className="d-none d-md-block">다운로드</span>
-												{/* <span className="d-md-none">W</span> */}
 											</NavLink>
 										</NavItem>
 										<NavItem>
@@ -291,14 +303,13 @@ const Data = (props) => {
 												onClick={(e) => toggleNavs_3(e, 3)}
 											>
 												<span className="d-none d-md-block">공유</span>
-												{/* <span className="d-md-none">W</span> */}
 											</NavLink>
 										</NavItem>										
 									</Nav>
 								</div>
 							</CardHeader>
-							<CardBody>
-								{/* Chart */}
+							<CardBody>								
+								</Row>
 								<div style={{height:"260px"}}>						
 									<Line
 										data={chartExample10[chartExample10Data]()}
@@ -308,7 +319,8 @@ const Data = (props) => {
 								</div>
 							</CardBody>
 						</Card>
-					</Col>			
+					</Col>	 
+					*/}		
 					<Col className="mb-5 mb-xl-0" xl="3">
 						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
@@ -338,49 +350,143 @@ const Data = (props) => {
 									</div>
 								</Row>
 							</CardHeader>
-              <Table className="align-items-center table-flush" responsive>
+              <Table className="align-items-center table-flush table-font-lg" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">분류</th>
-                    <th scope="col">이용수</th>
+                    <th scope="col">API명</th>
+                    <th scope="col">제공기관</th>
+                    <th scope="col">호출수</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>ChatGPI</td>
-                    <td>서비스</td>
-                    <td>263</td>						
+                    <td>ChatGPT AP</td>
+                    <td>OpenAI</td>
+                    <td>1,172</td>						
                   </tr>
                   <tr>
                     <td>자동차 산업 특화 챗봇</td>
-                    <td>서비스</td>
-                    <td>189</td>						
+                    <td>한국자동차연구원</td>
+                    <td>43</td>						
                   </tr>
                   <tr>
-                    <td>EXAONE-3.5-7.8B-Instruct</td>
-                    <td>AI/알고리즘</td>
-                    <td>64</td>						
+                    <td>Document parsing</td>
+                    <td>Upstage</td>
+                    <td>13</td>						
                   </tr>
                   <tr>
-                    <td>차량 침수차 여부 조회</td>
-                    <td>서비스</td>
-                    <td>36</td>						
+                    <td>Document OCR</td>
+                    <td>Upstage</td>
+                    <td>4</td>						
                   </tr>
                   <tr>
-                    <td>차량 폐차사고처리 여부 조회</td>
-                    <td>서비스</td>
-                    <td>25</td>						
+                    <td>Embeddings API</td>
+                    <td>Upstage</td>
+                    <td>4</td>						
                   </tr>																											
                 </tbody>
               </Table>
 						</Card>
-					</Col>													
+					</Col>			
+					<Col className="mb-5 mb-xl-0" xl="3">
+						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
+							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
+								<Row>
+									<div className="col">
+										<h2 className="text-dark mb-0">보유데이터 조회 Top5</h2>
+									</div>
+								</Row>
+							</CardHeader>
+              <Table className="align-items-center table-flush" responsive>
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">데이터명</th>
+                    <th scope="col">제공기관</th>
+                    <th scope="col">조회수</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>전기차 정밀 충방전시험 데이터</td>
+                    <td>엔모션</td>
+                    <td>606</td>						
+                  </tr>
+                  <tr>
+                    <td>SKR-EV OBC(충전), OBD(방전) 데이터</td>
+                    <td>SK렌터카</td>
+                    <td>509</td>						
+                  </tr>
+                  <tr>
+                    <td>전기차 충전인프라(충전기) 데이터</td>
+                    <td>차지인</td>
+                    <td>288</td>						
+                  </tr>
+                  <tr>
+                    <td>운전자 위험상황 모니터링 데이터</td>
+                    <td>한국자동차연구원</td>
+                    <td>279</td>						
+                  </tr>
+                  <tr>
+                    <td>배터리 관리 시스템(BMS) 검사 결과 데이터</td>
+                    <td>대구디지털혁신진흥원</td>
+                    <td>242</td>						
+                  </tr>																											
+                </tbody>
+              </Table>
+						</Card>
+					</Col>				
+					<Col className="mb-5 mb-xl-0" xl="3">
+						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
+							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
+								<Row>
+									<div className="col">
+										<h2 className="text-dark mb-0">보유데이터 다운로드 Top5</h2>
+									</div>
+								</Row>
+							</CardHeader>
+              <Table className="align-items-center table-flush" responsive>
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">데이터명</th>
+										<th scope="col">제공기관</th>										
+                    <th scope="col">다운로드 수</th>									
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>전기차 충전인프라(충전기) 데이터</td>
+                    <td>차지인</td>
+										<td>72</td>
+                  </tr>
+                  <tr>
+                    <td>전기차 정밀 충방전시험 데이터</td>
+                    <td>엔모션</td>
+										<td>64</td>
+                  </tr>
+                  <tr>
+                    <td>차량 정비 이미지 데이터</td>
+                    <td>트라이월드홀딩스</td>
+                    <td>58</td>
+                  </tr>
+                  <tr>
+                    <td>융합센서를 활용한 실시간 교통행태정보</td>
+                    <td>한국도로교통공단</td>
+                    <td>31</td>
+                  </tr>
+                  <tr>
+                    <td>자율주행차 실도로 주행 데이터</td>
+                    <td>아주대학교</td>
+                    <td>15</td>
+                  </tr>																											
+                </tbody>
+              </Table>
+						</Card>
+					</Col>																			
 				</Row>
 
-				<Row className="mt-3">			
+{/* 				<Row className="mt-3">			
 					<Col className="mb-5 mb-xl-0" xl="4">
-						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
+						<Card className="bg-gradient-neutral shadow">	
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
@@ -427,7 +533,7 @@ const Data = (props) => {
 						</Card>
 					</Col>					
 					<Col className="mb-5 mb-xl-0" xl="4">
-						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
+						<Card className="bg-gradient-neutral shadow">
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
@@ -480,7 +586,7 @@ const Data = (props) => {
 						</Card>
 					</Col>		
 					<Col className="mb-5 mb-xl-0" xl="4">
-						<Card className="bg-gradient-neutral shadow">	{/* 차트 배경 색 */}
+						<Card className="bg-gradient-neutral shadow">	
 							<CardHeader className="bg-transparent d-flex align-items-center" style={{ height: "60px" }}>
 								<Row>
 									<div className="col">
@@ -526,7 +632,7 @@ const Data = (props) => {
               </Table>
 						</Card>
 					</Col>														
-				</Row>								
+				</Row>			 */}					
 			</Container>
 		</>
 	);
