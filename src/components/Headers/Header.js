@@ -49,6 +49,36 @@ const Header = ({ title = "", subtitle = "", cards = [] }) => {
               deltaDirection={c.deltaDirection}
               deltaText={c.deltaText}
               className={c.className}
+              result={c.results}
+              messege={c.messege}
+            />
+          ))}
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+const Header_3 = ({ title = "", subtitle = "", cards = [] }) => {
+  const xl = calcXl(cards.length);
+
+  return (
+    <div className="header bg-gradient-info pb-8 pt-5 pt-md-5">
+      <Container fluid>
+        <Row>
+          {cards.map((c, idx) => (
+            <StatCard
+              key={c.key ?? idx}
+              col={c.col ?? { lg: "6", xl }} // 카드 개수에 따라 자동 폭
+              title={c.title}
+              value={c.value}
+              goal={c.goal}
+              iconClass={c.iconClass}
+              iconBgClass={c.iconBgClass}
+              delta={c.delta}
+              deltaDirection={c.deltaDirection}
+              deltaText={c.deltaText}
+              className={c.className}
             />
           ))}
         </Row>

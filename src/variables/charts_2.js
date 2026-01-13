@@ -1621,6 +1621,65 @@ export const chartExample15  = {
     ],
   },
 }
+
+export const chartExample16  = {
+  options: {
+    scales: {
+      yAxes: [
+				{
+					id: "y-left",	// 활용 시간
+					position: "left",
+          ticks: {
+            callback: function (value) {
+              if (!(value % 100)) {
+                return value.toLocaleString();
+              }
+            },
+            // fontColor: 'black',
+          },					
+          scaleLabel: {
+          display: true,
+          labelString: "API 호출 건 수",
+					},
+				},                 
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var yLabel = item.yLabel;
+          var content = "";
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+          content += ': ' + yLabel.toLocaleString() +'명';
+          return content;
+        },
+      },
+    },
+  },
+
+  data: {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+
+    datasets: [
+      {
+        type: 'bar',
+        label: "API 호출 건 수",
+        data: [0, 0, 0, 0, 0, 0, 0, 388, 13, 67, 280, 923],
+				backgroundColor: "#5A9CB5",
+        maxBarThickness: 30,
+      },
+      {
+        type: 'line',
+        label: "API 호출 건 (누적)수",
+        data: [0, 0, 0, 0, 0, 0, 0, 388, 401, 468, 748, 1671],
+        borderWidth: 3,
+      },                                          
+    ],
+  },
+}
 // modules.exports = {
 //   chartOptions, // used inside src/views/Index.js
 //   parseOptions, // used inside src/views/Index.js

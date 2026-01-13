@@ -1622,12 +1622,12 @@ pre code {
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #e9ecef;
-  font-size: 0.85rem;
+  font-size: 1rem;
 }
 
-.table.table-font-lg th,
-.table.table-font-lg td {
-  font-size: 16px !important;
+.table.table-font-lg thead th,
+.table.table-font-lg tbody td {
+  font-size: 20px !important;
 }
 
 .table tbody + tbody {

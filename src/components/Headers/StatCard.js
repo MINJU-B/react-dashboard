@@ -16,8 +16,9 @@ const StatCard = ({
   iconBgClass = "bg-danger",
   deltaDirection, // "up" | "down" | undefined
   delta, // 예: "3.48%" (정량적 목표)
-  deltaText = "정량적 목표",
+  deltaText = "전년도 대비",
   className = "",
+  messege,
 }) => {
   const dir = deltaDirection;
 
@@ -36,25 +37,17 @@ const StatCard = ({
                 {title}
               </CardTitle>
               <span className="h2 text-xl mb-0">{value}</span>
-              <span className="h2 text-muted mb-0"> | {goal}</span>              
             </div>
-
-            {/* <Col className="col-auto">
-              <div className={`icon icon-shape ${iconBgClass} text-white rounded-circle shadow`}>
-                <i className={iconClass} />
-              </div>
-            </Col> */}
           </Row>
-
           {(delta !== undefined || deltaText) && (
             <p className="mt-1 mb-0 text-default text-lg font-weight-normal">
-              <span className="text-nowrap">{deltaText} </span>
-              {delta !== undefined ? (
+              <span className="text-nowrap text-light">{messege} </span>
+              {/* {delta !== undefined ? (
                 <span className={`${deltaColorClass} mr-2 font-weight-bold`}>
                   {delta}
                 </span>
               ) : null}
-              <span>달성</span>              
+              <span>{result}</span>               */}
             </p>
           )}
         </CardBody>

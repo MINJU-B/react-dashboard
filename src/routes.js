@@ -20,7 +20,9 @@ import Index from "views/User.js";
 import Icons from "views/examples/Icons.js";
 import GPUaaS from "views/examples/Gpu.js";
 import User_2 from "views/User_2.js";
+import Adoption from "views/Adoption.js";
 import Data from "views/examples/Data.js";
+import Assets from "views/Assets.js";
 import GPUaaS_2 from "views/examples/Gpu_2.js";
 // import Dev from "views/dev.js";
 
@@ -46,6 +48,20 @@ var routes = [
     component: <GPUaaS_2/>,
     layout: "/admin",
   },
+  {
+    path: "/adoption",
+    name: "활성화",
+    icon: "ni ni-tv-2 text-primary",
+    component: <Adoption/>,
+    layout: "/admin",
+  },
+  {
+    path: "/assets",
+    name: "구축현황",
+    icon: "ni ni-tv-2 text-primary",
+    component: <Assets/>,
+    layout: "/admin",
+  },  
   // {
   //   path: "/index",
   //   name: "user_1",
